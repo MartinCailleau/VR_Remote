@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>WebSocket Test</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #181a20;
+            color: #e0e0e0;
+            margin: 0;
+            padding: 0;
+        }
+        h1 {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 2.2em;
+            color: #90caf9;
+        }
+        #buttons-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 24px;
+            margin: 32px auto;
+            max-width: 900px;
+        }
+        .button-group {
+            background: #232634;
+            border-radius: 18px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.18);
+            padding: 24px 18px 18px 18px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 160px;
+        }
+        .button-group button {
+            font-size: 1.5em;
+            padding: 24px 32px;
+            border-radius: 12px;
+            border: none;
+            background: #1976d2;
+            color: #fff;
+            font-weight: bold;
+            margin-bottom: 18px;
+            box-shadow: 0 2px 6px rgba(25,118,210,0.18);
+            transition: background 0.2s;
+        }
+        .button-group button:active {
+            background: #12509b;
+        }
+        .radio-group {
+            display: flex;
+            gap: 18px;
+            margin-bottom: 18px;
+            justify-content: center;
+        }
+        .radio-group input[type="radio"] {
+            display: none;
+        }
+        .radio-group label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: #232634;
+            border: 2px solid #1976d2;
+            border-radius: 6px;
+            font-size: 1.3em;
+            color: #b0b8c1;
+            cursor: pointer;
+            transition: background 0.2s, color 0.2s, border 0.2s;
+            font-weight: bold;
+            user-select: none;
+            margin: 0 4px;
+        }
+        .radio-group input[type="radio"]:checked + label {
+            background: #1976d2;
+            color: #fff;
+            border: 2px solid #90caf9;
+        }
+        #status {
+            text-align: center;
+            font-size: 1.2em;
+            margin-bottom: 24px;
+            color: #90caf9;
+        }
+    </style>
+</head>
+<body>
+    <h1 id="remote-title">Remote VR</h1>
+    <div id="status" style="display:none;"></div>
+    <div id="buttons-container"></div>
+    <script>
+        // Utilisation automatique de l'adresse IP du serveur pour la connexion WebSocket
+        function getWebSocketURL() {
+            let host = window.location.hostname;
+            if (!host) host = 'localhost';
+            return `ws://${host}:3000`;
+        }
+        const ws = new WebSocket(getWebSocketURL());
+        const statusDiv = document.getElementById('status');
+        // Affichage du message bleu uniquement en mode debug
+        let debugMode = false;
+        function showStatus(msg) {
+            if (debugMode) {
+                statusDiv.style.display = '';
+                statusDiv.textContent = msg;
+            } else {
+                statusDiv.style.display = 'none';
+            }
+        }
+        // Gestion du mode debug (5 clics rapides sur le titre)
+        let clickCount = 0;
+        let firstClickTime = 0;
+        document.getElementById('remote-title').onclick = () => {
+            const now = Date.now();
+            if (clickCount === 0) firstClickTime = now;
+            clickCount++;
+            if (clickCount === 5 && (now - firstClickTime) <= 2000) {
+                debugMode = !debugMode;
+                showStatus('Mode debug ' + (debugMode ? 'activé' : 'désactivé'));
+                setTimeout(() => showStatus(''), 1500);
+                clickCount = 0;
+            } else if ((now - firstClickTime) > 2000) {
+                clickCount = 1;
+                firstClickTime = now;
+            }
+        }
+        ws.onopen = () => {
+            ws.send(JSON.stringify({ type: 'identify', role: 'remote_vr' }));
+            showStatus('Connecté au serveur WebSocket');
+            ws.send(JSON.stringify({ type: 'get_headsets' }));
+        };
+        // Ajout dynamique d'un bloc d'interface pour chaque casque détecté
+        // Map pour éviter les doublons
+        const headsetBlocks = new Map();
+        const container = document.getElementById('buttons-container');
+        function addHeadsetBlock(id) {
+            if (headsetBlocks.has(id)) return;
+            const groupDiv = document.createElement('div');
+            groupDiv.className = 'button-group';
+            // Créer les radio buttons (1 à 5) au-dessus
+            const radioGroup = document.createElement('span');
+            radioGroup.className = 'radio-group';
+            for (let j = 1; j <= 5; j++) {
+                const radio = document.createElement('input');
+                radio.type = 'radio';
+                radio.name = `group${id}`;
+                radio.value = j;
+                radio.id = `btn${id}_radio${j}`;
+                if (j === 1) radio.checked = true;
+                const label = document.createElement('label');
+                label.htmlFor = radio.id;
+                label.textContent = j;
+                radioGroup.appendChild(radio);
+                radioGroup.appendChild(label);
+            }
+            groupDiv.appendChild(radioGroup);
+            // Créer le bouton Play
+            const btnPlay = document.createElement('button');
+            btnPlay.textContent = `Casque ${id} ▶️`;
+            btnPlay.style.width = '100%';
+            // Barre de progression pour Play
+            const playProgressBar = document.createElement('div');
+            playProgressBar.style.height = '6px';
+            playProgressBar.style.width = '0%';
+            playProgressBar.style.background = '#90caf9';
+            playProgressBar.style.transition = 'width 300ms linear';
+            playProgressBar.style.marginTop = '2px';
+            playProgressBar.style.borderRadius = '3px';
+            playProgressBar.style.display = 'none';
+            playProgressBar.style.minWidth = '0';
+            playProgressBar.style.maxWidth = 'none';
+            playProgressBar.style.alignSelf = 'center';
+            playProgressBar.style.width = btnPlay.style.width;
+            playProgressBar.style.marginLeft = btnPlay.style.marginLeft;
+            playProgressBar.style.marginRight = btnPlay.style.marginRight;
+            let playTimeout;
+            function startPlayProgress() {
+                playProgressBar.style.display = 'block';
+                playProgressBar.style.width = '0%';
+                setTimeout(() => { playProgressBar.style.width = '100%'; }, 10);
+            }
+            function resetPlayProgress() {
+                playProgressBar.style.display = 'none';
+                playProgressBar.style.width = '0%';
+            }
+            btnPlay.onmousedown = btnPlay.ontouchstart = (e) => {
+                e.preventDefault();
+                startPlayProgress();
+                playTimeout = setTimeout(() => {
+                    const radios = document.getElementsByName(`group${id}`);
+                    let selected = 1;
+                    for (const radio of radios) {
+                        if (radio.checked) {
+                            selected = radio.value;
+                            break;
+                        }
+                    }
+                    ws.send(`headset_${id}_play_${selected}`);
+                    resetPlayProgress();
+                }, 300);
+            };
+            btnPlay.onmouseup = btnPlay.ontouchend = btnPlay.onmouseleave = () => {
+                clearTimeout(playTimeout);
+                resetPlayProgress();
+            };
+            groupDiv.appendChild(btnPlay);
+            groupDiv.appendChild(playProgressBar);
+            // Créer le bouton Stop
+            const btnStop = document.createElement('button');
+            btnStop.textContent = `Stop ⏹️`;
+            btnStop.style.marginTop = '10px';
+            btnStop.style.background = '#d32f2f';
+            btnStop.style.color = '#fff';
+            btnStop.style.fontWeight = 'bold';
+            let stopTimeout;
+            // Barre de progression
+            const progressBar = document.createElement('div');
+            progressBar.style.height = '6px';
+            progressBar.style.width = '0%';
+            progressBar.style.background = '#ff5252';
+            progressBar.style.transition = 'width 2s linear';
+            progressBar.style.marginTop = '2px';
+            progressBar.style.borderRadius = '3px';
+            progressBar.style.display = 'none';
+            groupDiv.appendChild(progressBar);
+            function startProgress() {
+                progressBar.style.display = 'block';
+                progressBar.style.width = '0%';
+                setTimeout(() => { progressBar.style.width = '100%'; }, 10);
+            }
+            function resetProgress() {
+                progressBar.style.display = 'none';
+                progressBar.style.width = '0%';
+            }
+            btnStop.onmousedown = btnStop.ontouchstart = (e) => {
+                e.preventDefault();
+                startProgress();
+                stopTimeout = setTimeout(() => {
+                    ws.send(`headset_${id}_play_0`);
+                    resetProgress();
+                }, 2000);
+            };
+            btnStop.onmouseup = btnStop.ontouchend = btnStop.onmouseleave = () => {
+                clearTimeout(stopTimeout);
+                resetProgress();
+            };
+            groupDiv.appendChild(btnStop);
+            container.appendChild(groupDiv);
+            headsetBlocks.set(id, groupDiv);
+        }
+
+        // Suppression dynamique d'un bloc d'interface pour un casque déconnecté
+        function removeHeadsetBlock(id) {
+            const block = headsetBlocks.get(id);
+            if (block) {
+                block.remove();
+                headsetBlocks.delete(id);
+            }
+        }
+
+        ws.onmessage = (event) => {
+            showStatus('Message reçu: ' + event.data);
+            try {
+                const data = JSON.parse(event.data);
+                if (data.type === 'identify' && data.role === 'headset' && data.id) {
+                    addHeadsetBlock(data.id);
+                }
+                if (data.type === 'headset_list' && Array.isArray(data.ids)) {
+                    data.ids.forEach(id => addHeadsetBlock(id));
+                }
+                if (data.type === 'headset_disconnect' && data.id) {
+                    removeHeadsetBlock(data.id);
+                }
+            } catch (e) {}
+        };
+        ws.onclose = () => {
+            showStatus('Déconnecté du serveur WebSocket');
+        };
+        ws.onerror = (err) => {
+            showStatus('Erreur WebSocket');
+        };
+    </script>
+</body>
+</html>
