@@ -1,1 +1,6 @@
 /node_modules
+
+/Unreal_Remote_VR/Saved
+/Unreal_Remote_VR/Intermediate
+/Unreal_Remote_VR/DerivedDataCache
+/Unreal_Remote_VR/Binaries

@@ -1,0 +1,193 @@
+// Copyright Epic Games, Inc. All Rights Reserved.
+/*===========================================================================
+	Generated code exported from UnrealHeaderTool.
+	DO NOT modify this manually! Edit the corresponding .h files instead!
+===========================================================================*/
+
+// IWYU pragma: private, include "BlueprintWebSocketNodes.h"
+#include "UObject/ObjectMacros.h"
+#include "UObject/ScriptMacros.h"
+
+PRAGMA_DISABLE_DEPRECATION_WARNINGS
+ 
+class UBlueprintWebSocket;
+class UWebSocketConnectAsyncProxy;
+class UWebSocketCreateConnectAsyncProxy;
+class UWebSocketReconnectProxy;
+#ifdef BLUEPRINTWEBSOCKET_BlueprintWebSocketNodes_generated_h
+#error "BlueprintWebSocketNodes.generated.h already included, missing '#pragma once' in BlueprintWebSocketNodes.h"
+#endif
+#define BLUEPRINTWEBSOCKET_BlueprintWebSocketNodes_generated_h
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_11_DELEGATE \
+BLUEPRINTWEBSOCKET_API void FWebSocketEvent_DelegateWrapper(const FMulticastScriptDelegate& WebSocketEvent, const UBlueprintWebSocket* Socket, const int32 StatusCode, const FString& Message);
+
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execOnMessageInternal); \
+	DECLARE_FUNCTION(execOnCloseInternal); \
+	DECLARE_FUNCTION(execOnConnectionErrorInternal); \
+	DECLARE_FUNCTION(execOnConnectedInternal);
+
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_19_INCLASS_NO_PURE_DECLS \
+private: \
+	static void StaticRegisterNativesUWebSocketConnectAsyncProxyBase(); \
+	friend struct Z_Construct_UClass_UWebSocketConnectAsyncProxyBase_Statics; \
+public: \
+	DECLARE_CLASS(UWebSocketConnectAsyncProxyBase, UBlueprintAsyncActionBase, COMPILED_IN_FLAGS(CLASS_Abstract), CASTCLASS_None, TEXT("/Script/BlueprintWebSocket"), NO_API) \
+	DECLARE_SERIALIZER(UWebSocketConnectAsyncProxyBase)
+
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_19_ENHANCED_CONSTRUCTORS \
+private: \
+	/** Private move- and copy-constructors, should never be used */ \
+	UWebSocketConnectAsyncProxyBase(UWebSocketConnectAsyncProxyBase&&); \
+	UWebSocketConnectAsyncProxyBase(const UWebSocketConnectAsyncProxyBase&); \
+public: \
+	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UWebSocketConnectAsyncProxyBase); \
+	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UWebSocketConnectAsyncProxyBase); \
+	DEFINE_ABSTRACT_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UWebSocketConnectAsyncProxyBase) \
+	NO_API virtual ~UWebSocketConnectAsyncProxyBase();
+
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_16_PROLOG
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_19_GENERATED_BODY \
+PRAGMA_DISABLE_DEPRECATION_WARNINGS \
+public: \
+	FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_19_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_19_INCLASS_NO_PURE_DECLS \
+	FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_19_ENHANCED_CONSTRUCTORS \
+private: \
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+
+
+template<> BLUEPRINTWEBSOCKET_API UClass* StaticClass<class UWebSocketConnectAsyncProxyBase>();
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_71_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execConnect);
+
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_71_INCLASS_NO_PURE_DECLS \
+private: \
+	static void StaticRegisterNativesUWebSocketConnectAsyncProxy(); \
+	friend struct Z_Construct_UClass_UWebSocketConnectAsyncProxy_Statics; \
+public: \
+	DECLARE_CLASS(UWebSocketConnectAsyncProxy, UWebSocketConnectAsyncProxyBase, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/BlueprintWebSocket"), NO_API) \
+	DECLARE_SERIALIZER(UWebSocketConnectAsyncProxy)
+
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_71_ENHANCED_CONSTRUCTORS \
+private: \
+	/** Private move- and copy-constructors, should never be used */ \
+	UWebSocketConnectAsyncProxy(UWebSocketConnectAsyncProxy&&); \
+	UWebSocketConnectAsyncProxy(const UWebSocketConnectAsyncProxy&); \
+public: \
+	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UWebSocketConnectAsyncProxy); \
+	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UWebSocketConnectAsyncProxy); \
+	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UWebSocketConnectAsyncProxy) \
+	NO_API virtual ~UWebSocketConnectAsyncProxy();
+
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_68_PROLOG
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_71_GENERATED_BODY \
+PRAGMA_DISABLE_DEPRECATION_WARNINGS \
+public: \
+	FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_71_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_71_INCLASS_NO_PURE_DECLS \
+	FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_71_ENHANCED_CONSTRUCTORS \
+private: \
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+
+
+template<> BLUEPRINTWEBSOCKET_API UClass* StaticClass<class UWebSocketConnectAsyncProxy>();
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_87_DELEGATE \
+BLUEPRINTWEBSOCKET_API void FOnReconnectionEvent_DelegateWrapper(const FMulticastScriptDelegate& OnReconnectionEvent, UBlueprintWebSocket* WebSocket, int32 RemainingAttempts);
+
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_95_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execConnect);
+
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_95_INCLASS_NO_PURE_DECLS \
+private: \
+	static void StaticRegisterNativesUWebSocketCreateConnectAsyncProxy(); \
+	friend struct Z_Construct_UClass_UWebSocketCreateConnectAsyncProxy_Statics; \
+public: \
+	DECLARE_CLASS(UWebSocketCreateConnectAsyncProxy, UWebSocketConnectAsyncProxyBase, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/BlueprintWebSocket"), NO_API) \
+	DECLARE_SERIALIZER(UWebSocketCreateConnectAsyncProxy)
+
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_95_ENHANCED_CONSTRUCTORS \
+private: \
+	/** Private move- and copy-constructors, should never be used */ \
+	UWebSocketCreateConnectAsyncProxy(UWebSocketCreateConnectAsyncProxy&&); \
+	UWebSocketCreateConnectAsyncProxy(const UWebSocketCreateConnectAsyncProxy&); \
+public: \
+	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UWebSocketCreateConnectAsyncProxy); \
+	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UWebSocketCreateConnectAsyncProxy); \
+	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UWebSocketCreateConnectAsyncProxy) \
+	NO_API virtual ~UWebSocketCreateConnectAsyncProxy();
+
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_92_PROLOG
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_95_GENERATED_BODY \
+PRAGMA_DISABLE_DEPRECATION_WARNINGS \
+public: \
+	FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_95_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_95_INCLASS_NO_PURE_DECLS \
+	FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_95_ENHANCED_CONSTRUCTORS \
+private: \
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+
+
+template<> BLUEPRINTWEBSOCKET_API UClass* StaticClass<class UWebSocketCreateConnectAsyncProxy>();
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_113_RPC_WRAPPERS_NO_PURE_DECLS \
+	DECLARE_FUNCTION(execOnConnected); \
+	DECLARE_FUNCTION(execOnError); \
+	DECLARE_FUNCTION(execReconnect);
+
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_113_INCLASS_NO_PURE_DECLS \
+private: \
+	static void StaticRegisterNativesUWebSocketReconnectProxy(); \
+	friend struct Z_Construct_UClass_UWebSocketReconnectProxy_Statics; \
+public: \
+	DECLARE_CLASS(UWebSocketReconnectProxy, UBlueprintAsyncActionBase, COMPILED_IN_FLAGS(0), CASTCLASS_None, TEXT("/Script/BlueprintWebSocket"), NO_API) \
+	DECLARE_SERIALIZER(UWebSocketReconnectProxy)
+
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_113_ENHANCED_CONSTRUCTORS \
+	/** Standard constructor, called after all reflected properties have been initialized */ \
+	NO_API UWebSocketReconnectProxy(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get()); \
+private: \
+	/** Private move- and copy-constructors, should never be used */ \
+	UWebSocketReconnectProxy(UWebSocketReconnectProxy&&); \
+	UWebSocketReconnectProxy(const UWebSocketReconnectProxy&); \
+public: \
+	DECLARE_VTABLE_PTR_HELPER_CTOR(NO_API, UWebSocketReconnectProxy); \
+	DEFINE_VTABLE_PTR_HELPER_CTOR_CALLER(UWebSocketReconnectProxy); \
+	DEFINE_DEFAULT_OBJECT_INITIALIZER_CONSTRUCTOR_CALL(UWebSocketReconnectProxy) \
+	NO_API virtual ~UWebSocketReconnectProxy();
+
+
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_110_PROLOG
+#define FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_113_GENERATED_BODY \
+PRAGMA_DISABLE_DEPRECATION_WARNINGS \
+public: \
+	FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_113_RPC_WRAPPERS_NO_PURE_DECLS \
+	FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_113_INCLASS_NO_PURE_DECLS \
+	FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h_113_ENHANCED_CONSTRUCTORS \
+private: \
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
+
+
+template<> BLUEPRINTWEBSOCKET_API UClass* StaticClass<class UWebSocketReconnectProxy>();
+
+#undef CURRENT_FILE_ID
+#define CURRENT_FILE_ID FID_build_U5M_Marketplace_Sync_LocalBuilds_PluginTemp_HostProject_Plugins_BlueprintWebSocket_Source_BlueprintWebSocket_Private_BlueprintWebSocketNodes_h
+
+
+PRAGMA_ENABLE_DEPRECATION_WARNINGS
