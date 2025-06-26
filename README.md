@@ -58,6 +58,10 @@ Ce projet permet de contrôler à distance des casques VR connectés à un serve
 - Si l’interface ne détecte pas les casques, vérifiez que le serveur Node.js est bien lancé et que les ports 8080/3000 sont accessibles.
 - Pour tout problème, activez le mode debug pour afficher les logs de connexion WebSocket.
 
+## Amélioration possible 
+- Utiliser un fichier de config à coté du build pour redefinir l'adresse ip du serveur sans avoir à rebuild.
+- Utiliser ce même fichier de config pour définir l'id du casque, au lieu d'utiliser et de configurer les adresses ip static
+
 ---
 
 ## Integration Unreal
