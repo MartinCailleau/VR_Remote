@@ -74,5 +74,9 @@ Ce projet permet de contrôler à distance des casques VR connectés à un serve
 3. Configurer manuellement les adresse ip static des casques de X.X.X.1 à X.X.X.15
 4. Configurer l'adresse ip static du serveur en accord avec l'adresse écrite dans le GI_Remote_VR, (ici 192.168.1.111)
 
+## Configuration materiel recommendée
+- routeur wifi
+- raspberry pi 3(ou +) / mini pc -> branché en ethernet au routeur
+- tablette ou telephone récent d'entré de gamme (android ou apple peut importe) avec un navigateur (firefox, safari ou chrome).
 
 **Auteur :** Martin Cailleau
