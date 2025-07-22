@@ -146,13 +146,13 @@
             // Créer les radio buttons (1 à 5) au-dessus
             const radioGroup = document.createElement('span');
             radioGroup.className = 'radio-group';
-            for (let j = 1; j <= 5; j++) {
+            for (let j = 0; j <= 5; j++) {
                 const radio = document.createElement('input');
                 radio.type = 'radio';
                 radio.name = `group${id}`;
                 radio.value = j;
                 radio.id = `btn${id}_radio${j}`;
-                if (j === 1) radio.checked = true;
+                if (j === 0) radio.checked = true;
                 const label = document.createElement('label');
                 label.htmlFor = radio.id;
                 label.textContent = j;
@@ -194,7 +194,7 @@
                 startPlayProgress();
                 playTimeout = setTimeout(() => {
                     const radios = document.getElementsByName(`group${id}`);
-                    let selected = 1;
+                    let selected = 0;
                     for (const radio of radios) {
                         if (radio.checked) {
                             selected = radio.value;
@@ -242,7 +242,7 @@
                 e.preventDefault();
                 startProgress();
                 stopTimeout = setTimeout(() => {
-                    ws.send(`headset_${id}_play_0`);
+                    ws.send(`headset_${id}_play_9`); // Envoi de la commande d'arrêt
                     resetProgress();
                 }, 2000);
             };

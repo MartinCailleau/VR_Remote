@@ -51,7 +51,8 @@ wss.on('connection', (ws, req) => {
             return;
         }
         // Routage des commandes headset_X_play_Y
-        const match = msgStr.match(/^headset_(\d+)_play_(\d+)$/);
+        console.log(msgStr);
+        const match = msgStr.match(/^headset_(\d+)_play_(-?\d+)$/);
         if (match) {
             const headsetId = match[1];
             wss.clients.forEach(client => {
