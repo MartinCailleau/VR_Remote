@@ -88,11 +88,40 @@
             margin-bottom: 24px;
             color: #90caf9;
         }
+        #launch-all-btn {
+            font-size: 1.6em;
+            padding: 20px 48px;
+            border-radius: 12px;
+            border: none;
+            background: #2e7d32;
+            color: #fff;
+            font-weight: bold;
+            box-shadow: 0 2px 6px rgba(46,125,50,0.25);
+            transition: background 0.2s;
+            cursor: pointer;
+        }
+        #launch-all-btn:active {
+            background: #1b5e20;
+        }
+        #launch-all-progress {
+            height: 6px;
+            width: 0%;
+            max-width: 400px;
+            background: #66bb6a;
+            transition: width 300ms linear;
+            margin: 6px auto 0 auto;
+            border-radius: 3px;
+            display: none;
+        }
     </style>
 </head>
 <body>
     <h1 id="remote-title">Remote VR</h1>
     <div id="status" style="display:none;"></div>
+    <div id="launch-all-container" style="text-align:center; margin: 16px auto;">
+        <button id="launch-all-btn" style="display:none;">🚀 Launch All</button>
+        <div id="launch-all-progress"></div>
+    </div>
     <div id="buttons-container"></div>
     <script>
         // Utilisation automatique de l'adresse IP du serveur pour la connexion WebSocket
@@ -139,6 +168,39 @@
         // Map pour éviter les doublons
         const headsetBlocks = new Map();
         const container = document.getElementById('buttons-container');
+
+        // Bouton "Launch All" : lance le 1er film (film 1) sur tous les casques en même temps
+        const launchAllBtn = document.getElementById('launch-all-btn');
+        const launchAllProgress = document.getElementById('launch-all-progress');
+        const LAUNCH_ALL_FILM = 1; // numéro du 1er film
+        let launchAllTimeout;
+        function updateLaunchAllVisibility() {
+            launchAllBtn.style.display = headsetBlocks.size > 0 ? '' : 'none';
+        }
+        function startLaunchAllProgress() {
+            launchAllProgress.style.display = 'block';
+            launchAllProgress.style.width = '0%';
+            setTimeout(() => { launchAllProgress.style.width = '100%'; }, 10);
+        }
+        function resetLaunchAllProgress() {
+            launchAllProgress.style.display = 'none';
+            launchAllProgress.style.width = '0%';
+        }
+        launchAllBtn.onmousedown = launchAllBtn.ontouchstart = (e) => {
+            e.preventDefault();
+            startLaunchAllProgress();
+            launchAllTimeout = setTimeout(() => {
+                headsetBlocks.forEach((block, id) => {
+                    ws.send(`headset_${id}_play_${LAUNCH_ALL_FILM}`);
+                });
+                resetLaunchAllProgress();
+            }, 300);
+        };
+        launchAllBtn.onmouseup = launchAllBtn.ontouchend = launchAllBtn.onmouseleave = () => {
+            clearTimeout(launchAllTimeout);
+            resetLaunchAllProgress();
+        };
+
         function addHeadsetBlock(id) {
             if (headsetBlocks.has(id)) return;
             const groupDiv = document.createElement('div');
@@ -253,6 +315,7 @@
             groupDiv.appendChild(btnStop);
             container.appendChild(groupDiv);
             headsetBlocks.set(id, groupDiv);
+            updateLaunchAllVisibility();
         }
 
         // Suppression dynamique d'un bloc d'interface pour un casque déconnecté
@@ -261,6 +324,7 @@
             if (block) {
                 block.remove();
                 headsetBlocks.delete(id);
+                updateLaunchAllVisibility();
             }
         }
 
